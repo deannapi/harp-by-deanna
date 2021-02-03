@@ -1,56 +1,58 @@
-import React from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import harp5 from "../images/Harp5.jpeg";
 
-export default class Contact extends React.Component {
-  handleSubmit(e) {
+const Contact = () => {
+  // export default class Contact extends React.Component {
+  const [status, setStatus] = useState("Submit");
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const number = document.getElementById("number").value;
-    const title = document.getElementById("title").value;
-    const description = document.getElementById("description").value;
-    const date = document.getElementById("date").value;
-    const startTime = document.getElementById("startTime").value;
-    const endTime = document.getElementById("endTime").value;
-    const city = document.getElementById("city").value;
-    const state = document.getElementById("state").value;
-    const details = document.getElementById("details").value;
-
-    axios({
-      method: "post",
-      url: "/contact",
-      data: {
-        name: name,
-        email: email,
-        number: number,
-        title: title,
-        description: description,
-        date: date,
-        startTime: startTime,
-        endTime: endTime,
-        city: city,
-        state: state,
-        details: details,
-      },
-    }).then((response) => {
-      if (response.data.msg === "success") {
-        alert("Message Sent");
-        this.resetForm();
-      } else if (response.data.msg === "fail") {
-        alert("Message failed to send.");
-      }
+    setStatus("Sending...");
+    const {
+      name,
+      email,
+      number,
+      // title,
+      // description,
+      // date,
+      // startTime,
+      // endTime,
+      // city,
+      // state,
+      details,
+    } = e.target.elements;
+    let all_items = {
+      name: name.value,
+      email: email.value,
+      number: number.value,
+      // title: title.value,
+      // description: description.value,
+      // date: date.value,
+      // startTime: startTime.value,
+      // endTime: endTime.value,
+      // city: city.value,
+      // state: state.value,
+      details: details.value,
+    };
+    let response = await fetch("http://localhost:3000/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json;charset=utf-8" },
+      body: JSON.stringify(all_items),
     });
-  }
+    setStatus("Sent");
+    let result = await response.json();
+    alert(result.status);
 
-  resetForm() {
-    document.getElementById("contact-form").reset();
-  }
+    // const resetForm = () => {
+    // document.getElementById("contact-form").reset();
+    // this.setState({ setStatus: "Message sent." });
+    // }
+    console.log(all_items);
+  };
 
-  render() {
-    return (
-      <>
-        {/* <Header as="h2">Get In Touch!</Header>
+  // render() {
+  return (
+    <>
+      {/* <Header as="h2">Get In Touch!</Header>
         <div className="contact">
           <Label className="contactLabel">Email:</Label>
           <a href="mailto:deannapi.mart@gmail.com">
@@ -89,94 +91,91 @@ export default class Contact extends React.Component {
           </a>
         </div> */}
 
-        <div className="contactform container">
-          <img src={harp5} id="harp5" alt="harp5" />
-          <h5>Have all your event details? Complete the form.</h5>
-          <form
-            onSubmit={this.handleSubmit.bind(this)}
-            id="contact-form"
-            method="POST"
-            action="/contact"
-          >
-            <div className="row">
-              <label>First & Last Name</label>
-              <input
-                placeholder="Full name"
-                type="text"
-                name="name"
-                id="name"
-              />
-              <label>Email</label>
-              <input type="email" name="email" id="email" />
-              <label>Phone Number</label>
-              <input type="tel" name="number" id="number" />
-            </div>
+      <div className="contactform">
+        <img src={harp5} id="harp5" alt="harp5" />
+        <h5>Have all your event details? Complete the form.</h5>
+        <form
+          onSubmit={handleSubmit}
+          id="contact-form"
+          // method="POST"
+          // action="/contact"
+        >
+          {/* <div className="row"> */}
+            <label>First & Last Name</label>
+            <input placeholder="Full name" type="text" name="name" id="name" />
+            <label>Email</label>
+            <input type="email" name="email" id="email" />
+            <label>Phone Number</label>
+            <input type="tel" name="number" id="number" />
+          {/* </div> */}
 
-            <div className="row">
-              <label>Event Title</label>
-              <input
-                placeholder="Wedding, Birthday, Dinner..."
-                type="text"
-                name="title"
-                id="title"
-              />
-              <label>Description</label>
-              <input
-                type="text"
-                placeholder="background music"
-                name="description"
-                id="description"
-              />
-            </div>
+          {/* <div className="row">
+            <label>Event Title</label>
+            <input
+              placeholder="Wedding, Birthday, Dinner..."
+              type="text"
+              name="title"
+              id="title"
+            />
+            <label>Description</label>
+            <input
+              type="text"
+              placeholder="background music"
+              name="description"
+              id="description"
+            />
+          </div>
 
-            <div className="row">
-              <label>Event Date</label>
-              <input type="date" name="date" id="date" />
-              <label>Start Time</label>
-              <input type="time" name="startTime" id="startTime" />
-              <label>End Time</label>
-              <input type="time" name="endTime" id="endTime" />
-            </div>
+          <div className="row">
+            <label>Event Date</label>
+            <input type="date" name="date" id="date" />
+            <label>Start Time</label>
+            <input type="time" name="startTime" id="startTime" />
+            <label>End Time</label>
+            <input type="time" name="endTime" id="endTime" />
+          </div>
 
-            <div className="row">
-              <label>City</label>
-              <input type="text" name="city" id="city" />
-              <label>State</label>
-              <input type="text" name="state" id="state" />
-            </div>
+          <div className="row">
+            <label>City</label>
+            <input type="text" name="city" id="city" />
+            <label>State</label>
+            <input type="text" name="state" id="state" />
+          </div> */}
 
-            <div className="row">
-              <label>Other Details</label>
-              <textarea
-                type="text"
-                placeholder="# of people, inside/outside, music requests"
-                name="details"
-                id="details"
-                rows="8"
-                cols="30"
-              />
-            </div>
+          {/* <div className="row"> */}
+            <label>Other Details</label>
+            <textarea
+              type="text"
+              placeholder="Date, Time, Location, Description"
+              name="details"
+              id="details"
+              rows="15"
+              cols="30"
+            />
+          {/* </div> */}
 
-            <button type="submit">Submit</button>
+          <button type="submit">{status}</button>
 
-            {/* SUCCESS MESSAGE */}
-            <div>
-              {window.location.hash === "#success" && (
-                <div id="success">
-                  <p>
-                    Your message has been sent. I will reach out to you shortly!
-                  </p>
-                </div>
-              )}
-              {window.location.hash === "#error" && (
-                <div id="error">
-                  <p>Uh oh! An error occured while submitting the form.</p>
-                </div>
-              )}
-            </div>
-          </form>
-        </div>
-      </>
-    );
-  }
-}
+          {/* SUCCESS MESSAGE */}
+          <div>
+            {window.location.hash === "#success" && (
+              <div id="success">
+                <p>
+                  Your message has been sent. I will reach out to you shortly!
+                </p>
+              </div>
+            )}
+            {window.location.hash === "#error" && (
+              <div id="error">
+                <p>Uh oh! An error occurred while submitting the form.</p>
+              </div>
+            )}
+          </div>
+        </form>
+      </div>
+    </>
+  );
+  // }
+};
+
+export default Contact;

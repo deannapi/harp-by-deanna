@@ -174,7 +174,7 @@ h5 {
 
 form {
   text-align: center;
-  display: inline-block;
+  display: inline-grid;
 }
 
 button {
