@@ -1,52 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
+import emailjs from "emailjs-com";
+import swal from "sweetalert2";
 import harp5 from "../images/Harp5.jpeg";
 
 const Contact = () => {
   // export default class Contact extends React.Component {
-  const [status, setStatus] = useState("Submit");
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus("Sending...");
-    const {
-      name,
-      email,
-      number,
-      // title,
-      // description,
-      // date,
-      // startTime,
-      // endTime,
-      // city,
-      // state,
-      details,
-    } = e.target.elements;
-    let all_items = {
-      name: name.value,
-      email: email.value,
-      number: number.value,
-      // title: title.value,
-      // description: description.value,
-      // date: date.value,
-      // startTime: startTime.value,
-      // endTime: endTime.value,
-      // city: city.value,
-      // state: state.value,
-      details: details.value,
-    };
-    let response = await fetch("http://localhost:3000/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json;charset=utf-8" },
-      body: JSON.stringify(all_items),
-    });
-    setStatus("Sent");
-    let result = await response.json();
-    alert(result.status);
-
-    // const resetForm = () => {
-    // document.getElementById("contact-form").reset();
-    // this.setState({ setStatus: "Message sent." });
-    // }
-    console.log(all_items);
+    emailjs
+      .sendForm(
+        process.env.EMAILJS_SERVICE_ID,
+        process.env.EMAILJS_TEMPLATE_ID,
+        e.target,
+        process.env.EMAILJS_USERID
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          swal.fire(
+            "Message sent",
+            "Harp By DeAnna will get back to you shortly!",
+            "success"
+          );
+        },
+        (error) => {
+          console.log(error.text);
+          swal.fire("Message Error", error.text, "error");
+        }
+      );
+    e.target.reset();
   };
 
   // render() {
@@ -101,12 +83,12 @@ const Contact = () => {
           // action="/contact"
         >
           {/* <div className="row"> */}
-            <label>First & Last Name</label>
-            <input placeholder="Full name" type="text" name="name" id="name" />
-            <label>Email</label>
-            <input type="email" name="email" id="email" />
-            <label>Phone Number</label>
-            <input type="tel" name="number" id="number" />
+          <label>First & Last Name</label>
+          <input placeholder="Full name" type="text" name="user_name" id="name" />
+          <label>Email</label>
+          <input type="email" name="user_email" id="email" />
+          <label>Phone Number</label>
+          <input type="tel" name="user_number" id="number" />
           {/* </div> */}
 
           {/* <div className="row">
@@ -143,34 +125,18 @@ const Contact = () => {
           </div> */}
 
           {/* <div className="row"> */}
-            <label>Other Details</label>
-            <textarea
-              type="text"
-              placeholder="Date, Time, Location, Description"
-              name="details"
-              id="details"
-              rows="15"
-              cols="30"
-            />
+          <label>Other Details</label>
+          <textarea
+            type="text"
+            placeholder="Date, Time, Location, Description"
+            name="message"
+            id="details"
+            rows="15"
+            cols="30"
+          />
           {/* </div> */}
 
-          <button type="submit">{status}</button>
-
-          {/* SUCCESS MESSAGE */}
-          <div>
-            {window.location.hash === "#success" && (
-              <div id="success">
-                <p>
-                  Your message has been sent. I will reach out to you shortly!
-                </p>
-              </div>
-            )}
-            {window.location.hash === "#error" && (
-              <div id="error">
-                <p>Uh oh! An error occurred while submitting the form.</p>
-              </div>
-            )}
-          </div>
+          <button type="submit">Submit</button>
         </form>
       </div>
     </>

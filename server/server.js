@@ -2,43 +2,18 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const router = express.Router();
-const path = require('path');
-// const { google } = require("googleapis");
-// const OAuth2 = google.auth.OAuth2;
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
-app.use("/", router);
-
-app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use("/", router);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+  });
 
-// DO NOT NEED ALL OF THIS ****** QUIT ADDING IT
-// Serve up static assets
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static(path.join(__dirname, "../client/build")));
-// }
+// app.use(express.urlencoded({ extended: false }));
 
-// app.get("*", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
-
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}.`);
-// });
-
-// const oauth2Client = new OAuth2(
-//   process.env.OAUTH_CLIENT_ID,
-//   process.env.OAUTH_CLIENT_SECRET,
-//   "https://developers.google.com/oauthplayground" //Redirect URL
-// );
-
-// oauth2Client.setCredentials({
-//   refresh_token: process.env.OAUTH_REFRESH_TOKEN,
-// });
-
-// const accessToken = oauth2Client.getAccessToken();
 
 const smtpTransport = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -54,26 +29,13 @@ const smtpTransport = nodemailer.createTransport({
     refreshToken: process.env.OAUTH_REFRESH_TOKEN,
     accessToken: process.env.OAUTH_ACCESS_TOKEN,
   },
-  // tls: {
-  //   rejectUnauthoratized: false,
-  // },
 });
-
-// FROM POSTMAN
-// const smtpTransport = nodemailer.createTransport({
-//   host: 'localhost',
-//   port: 1025,
-//   auth: {
-//       user: 'project.1',
-//       pass: 'secret.1'
-//   }
-// });
 
 smtpTransport.verify((error, success) => {
   if (error) {
     console.log("SMTP Error:", error);
   } else {
-    console.log("Server is ready to take messages:", success);
+    console.log("Server is ready to take messages.");
   }
 });
 
@@ -94,7 +56,6 @@ router.post("/contact", (req, res) => {
     from: email,
     to: process.env.USER,
     subject: "Harp Gig Request",
-    generateTextFromHTML: true,
     html: `<h1>${name} has sent a Harp Gig Request</h1>
       <p>Email: ${email} Number: ${number}</p>
       <p>Details: ${details}</p>`,
@@ -102,18 +63,14 @@ router.post("/contact", (req, res) => {
 
   smtpTransport.sendMail(mailOptions, (error, response) => {
     if (error) {
-      res.json({ status: "ERROR", error });
       console.log(error);
-      // res.send(error);
-      res.redirect("/#error");
+    //   res.send(error);
+    //   res.redirect("/#error");
     } else {
-      res.json({ status: "Message Sent Successfully." });
       console.log("Message was sent!", response);
-      // res.send("Email sent successfully.");
-      res.redirect("/#success");
+    //   res.send("Email sent successfully.");
+    //   res.redirect("/#success");
     }
-    smtpTransport.close();
+    // smtpTransport.close();
   });
 });
-
-module.exports = app;
