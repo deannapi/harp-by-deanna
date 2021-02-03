@@ -2,9 +2,15 @@
   "name": "harp-by-deanna",
   "version": "1.0.0",
   "description": "Harp Gig Booking Website",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd server && npm start",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "repository": {
     "type": "git",
@@ -21,5 +27,14 @@
   "bugs": {
     "url": "https://github.com/deannapi/harp-by-deanna/issues"
   },
-  "homepage": "https://github.com/deannapi/harp-by-deanna#readme"
+  "homepage": "https://github.com/deannapi/harp-by-deanna#readme",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.1",
+    "web-vitals": "^1.1.0"
+  }
 }
