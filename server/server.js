@@ -2,18 +2,31 @@ const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const router = express.Router();
+const path = require('path');
 // const { google } = require("googleapis");
 // const OAuth2 = google.auth.OAuth2;
 
+const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors());
-app.use(express.json());
 app.use("/", router);
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
-});
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// DO NOT NEED ALL OF THIS ****** QUIT ADDING IT
+// Serve up static assets
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "../client/build")));
+// }
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
+// });
+
+// app.listen(PORT, () => {
+//   console.log(`Server is running on port ${PORT}.`);
+// });
 
 // const oauth2Client = new OAuth2(
 //   process.env.OAUTH_CLIENT_ID,
@@ -92,12 +105,12 @@ router.post("/contact", (req, res) => {
       res.json({ status: "ERROR", error });
       console.log(error);
       // res.send(error);
-        res.redirect("/#error");
+      res.redirect("/#error");
     } else {
       res.json({ status: "Message Sent Successfully." });
       console.log("Message was sent!", response);
       // res.send("Email sent successfully.");
-        res.redirect("/#success");
+      res.redirect("/#success");
     }
     smtpTransport.close();
   });
