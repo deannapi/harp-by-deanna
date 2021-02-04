@@ -9,27 +9,20 @@ export default function Contact() {
   const user_id = "user_Tru3DqyiMp0lrjSlsczvJ";
   function handleSubmit(e) {
     e.preventDefault();
-    emailjs
-      .sendForm(
-        service_id,
-        template_id,
-        e.target,
-        user_id
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-          swal.fire(
-            "Message Sent",
-            "Thank you for contacting Harp By DeAnna. I will get back to you shortly!",
-            "success"
-          );
-        },
-        (error) => {
-          console.log(error.text);
-          swal.fire("Message Error", error.text, "error");
-        }
-      );
+    emailjs.sendForm(service_id, template_id, e.target, user_id).then(
+      (result) => {
+        console.log(result.text);
+        swal.fire(
+          "Message Sent",
+          "Thank you for contacting Harp By DeAnna. I will get back to you shortly!",
+          "success"
+        );
+      },
+      (error) => {
+        console.log(error.text);
+        swal.fire("Message Error", error.text, "error");
+      }
+    );
     e.target.reset();
   }
 
@@ -91,38 +84,32 @@ export default function Contact() {
           <label>Phone Number</label>
           <input type="tel" name="user_number" id="number" />
 
-          {/* <div className="row">
-            <label>Event Title</label>
-            <input
-              placeholder="Wedding, Birthday, Dinner..."
-              type="text"
-              name="title"
-              id="title"
-            />
-            <label>Description</label>
-            <input
-              type="text"
-              placeholder="background music"
-              name="description"
-              id="description"
-            />
-          </div>
+          <label>Event Title</label>
+          <input
+            placeholder="Wedding, Birthday, Dinner..."
+            type="text"
+            name="title"
+            id="title"
+          />
+          <label>Description</label>
+          <input
+            type="text"
+            placeholder="background music"
+            name="description"
+            id="description"
+          />
 
-          <div className="row">
-            <label>Event Date</label>
-            <input type="date" name="date" id="date" />
-            <label>Start Time</label>
-            <input type="time" name="startTime" id="startTime" />
-            <label>End Time</label>
-            <input type="time" name="endTime" id="endTime" />
-          </div>
+          <label>Event Date</label>
+          <input type="date" name="date" id="date" />
+          <label>Start Time</label>
+          <input type="time" name="startTime" id="startTime" />
+          <label>End Time</label>
+          <input type="time" name="endTime" id="endTime" />
 
-          <div className="row">
-            <label>City</label>
-            <input type="text" name="city" id="city" />
-            <label>State</label>
-            <input type="text" name="state" id="state" />
-          </div> */}
+          <label>City</label>
+          <input type="text" name="city" id="city" />
+          <label>State</label>
+          <input type="text" name="state" id="state" />
 
           <label>Other Details</label>
           <textarea
@@ -135,7 +122,6 @@ export default function Contact() {
           />
 
           <input type="submit" value="Submit" id="submit"></input>
-          {/* <button type="submit">Submit</button> */}
         </form>
       </div>
     </>
