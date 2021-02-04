@@ -177,19 +177,20 @@ form {
   display: inline-grid;
 }
 
-button {
+#submit {
   background-color: var(--rosegold);
   border-radius: 30px;
   font-weight: 600;
   font-variant: small-caps;
+  font-size: 14px;
   border: grey 3px double;
 }
 
-button:hover {
+#submit:hover {
   background-color: grey;
 }
 
-button:focus {
+#submit:focus {
   background-color: black;
   color: white;
 }

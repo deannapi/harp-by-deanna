@@ -3,23 +3,25 @@ import emailjs from "emailjs-com";
 import swal from "sweetalert2";
 import harp5 from "../images/Harp5.jpeg";
 
-const Contact = () => {
-  // export default class Contact extends React.Component {
-  const handleSubmit = (e) => {
+export default function Contact() {
+  const service_id = "harpbydeanna.gmail";
+  const template_id = "harpbydeanna_template";
+  const user_id = "user_Tru3DqyiMp0lrjSlsczvJ";
+  function handleSubmit(e) {
     e.preventDefault();
     emailjs
       .sendForm(
-        process.env.EMAILJS_SERVICE_ID,
-        process.env.EMAILJS_TEMPLATE_ID,
+        service_id,
+        template_id,
         e.target,
-        process.env.EMAILJS_USERID
+        user_id
       )
       .then(
         (result) => {
           console.log(result.text);
           swal.fire(
-            "Message sent",
-            "Harp By DeAnna will get back to you shortly!",
+            "Message Sent",
+            "Thank you for contacting Harp By DeAnna. I will get back to you shortly!",
             "success"
           );
         },
@@ -29,7 +31,7 @@ const Contact = () => {
         }
       );
     e.target.reset();
-  };
+  }
 
   // render() {
   return (
@@ -76,20 +78,18 @@ const Contact = () => {
       <div className="contactform">
         <img src={harp5} id="harp5" alt="harp5" />
         <h5>Have all your event details? Complete the form.</h5>
-        <form
-          onSubmit={handleSubmit}
-          id="contact-form"
-          // method="POST"
-          // action="/contact"
-        >
-          {/* <div className="row"> */}
+        <form id="contact-form" onSubmit={handleSubmit}>
           <label>First & Last Name</label>
-          <input placeholder="Full name" type="text" name="user_name" id="name" />
+          <input
+            placeholder="Full name"
+            type="text"
+            name="user_name"
+            id="name"
+          />
           <label>Email</label>
           <input type="email" name="user_email" id="email" />
           <label>Phone Number</label>
           <input type="tel" name="user_number" id="number" />
-          {/* </div> */}
 
           {/* <div className="row">
             <label>Event Title</label>
@@ -124,24 +124,20 @@ const Contact = () => {
             <input type="text" name="state" id="state" />
           </div> */}
 
-          {/* <div className="row"> */}
           <label>Other Details</label>
           <textarea
             type="text"
             placeholder="Date, Time, Location, Description"
-            name="message"
+            name="details"
             id="details"
             rows="15"
             cols="30"
           />
-          {/* </div> */}
 
-          <button type="submit">Submit</button>
+          <input type="submit" value="Submit" id="submit"></input>
+          {/* <button type="submit">Submit</button> */}
         </form>
       </div>
     </>
   );
-  // }
-};
-
-export default Contact;
+}
