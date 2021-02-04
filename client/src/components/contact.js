@@ -7,6 +7,7 @@ export default function Contact() {
   const service_id = "harpbydeanna.gmail";
   const template_id = "harpbydeanna_template";
   const user_id = "user_Tru3DqyiMp0lrjSlsczvJ";
+  // var site_key = process.env.CAPTCHA_SITE_KEY;
   function handleSubmit(e) {
     e.preventDefault();
     emailjs.sendForm(service_id, template_id, e.target, user_id).then(
@@ -70,8 +71,13 @@ export default function Contact() {
 
       <div className="contactform">
         <img src={harp5} id="harp5" alt="harp5" />
-        <h5>Have all your event details? Complete the form.</h5>
-        <form id="contact-form" onSubmit={handleSubmit}>
+        <h5>Please complete the form.</h5>
+        <form
+          id="contact-form"
+          onSubmit={handleSubmit}
+          action="?"
+          method="POST"
+        >
           <label>First & Last Name</label>
           <input
             placeholder="Full name"
@@ -120,7 +126,7 @@ export default function Contact() {
             rows="15"
             cols="30"
           />
-
+          <div className="g-recaptcha" data-sitekey="6LdI4kkaAAAAAIhdPBjJgzGtSWPGZ2IgPsp6PUX-"></div>
           <input type="submit" value="Submit" id="submit"></input>
         </form>
       </div>
