@@ -16,6 +16,16 @@ export default class Events extends React.Component {
             <li>Virtual Events</li>
           </ul>
         </div>
+        <br></br>
+        <div className="review">
+          <a
+            href="https://g.page/harp-by-deanna/review?gm"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <h5>Leave a Review</h5>
+          </a>
+        </div>
 
         <div className="embed-responsive embed-responsive-4by3">
           <iframe

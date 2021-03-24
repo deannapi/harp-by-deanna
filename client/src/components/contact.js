@@ -30,9 +30,9 @@ export default function Contact() {
   // render() {
   return (
     <>
-      {/* <Header as="h2">Get In Touch!</Header>
+      <header as="h2">Get In Touch!</header>
         <div className="contact">
-          <Label className="contactLabel">Email:</Label>
+          <label className="contactLabel">Email:</label>
           <a href="mailto:deannapi.mart@gmail.com">
             <svg
               width="1em"
@@ -50,7 +50,7 @@ export default function Contact() {
             deannapi.mart@gmail.com
           </a>
           <br />
-          <Label className="contactLabel">Phone: </Label>
+          <label className="contactLabel">Phone: </label>
           <a href="tel:14324259101">
             <svg
               width="1em"
@@ -67,11 +67,11 @@ export default function Contact() {
             </svg>
             (m) 432.425.9101
           </a>
-        </div> */}
+        </div>
 
       <div className="contactform">
         <img src={harp5} id="harp5" alt="harp5" />
-        <h5>Please complete the form.</h5>
+        <h5>Have all your event details? omplete the form.</h5>
         <form
           id="contact-form"
           onSubmit={handleSubmit}
@@ -132,4 +132,5 @@ export default function Contact() {
       </div>
     </>
   );
+  // }
 }

@@ -25,18 +25,18 @@ header h1 {
   font-size: 50px;
 }
 
-header,
-nav {
+header {
   text-align: center;
 }
 
-nav ul li {
-  display: inline-block;
-  padding-left: 10px;
+.dropdown-item {
+  color: #b76e79;
+  font-weight: bold;
 }
 
-nav ul li a {
-  color: black;
+.dropdown-item:hover {
+  background-color: gray;
+  color: whitesmoke;
 }
 
 ul li {
@@ -202,10 +202,8 @@ form {
   border-radius: 40px;
 }
 
-.embed-responsive-item {
-  width: 50%;
-  height: 50%;
-  /* margin-left: 20%; */
+.embed-responsive {
+  width: 60%;
 }
 
 iframe {
@@ -216,4 +214,14 @@ iframe {
 .events h2 {
   font-family: "Gabriola", cursive;
   font-variant: small-caps;
+}
+
+.review {
+  text-align: center;
+}
+
+.review {
+  text-align: center;
+  border: 8px var(--rosegold) double;
+  border-radius: 40px;
 }
