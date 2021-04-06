@@ -19,17 +19,17 @@ export default class Header extends React.Component {
             >
               Menu
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="/home">
+            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a className="dropdown-item" href="/home">
                 Home
               </a>
-              <a class="dropdown-item" href="/about">
+              <a className="dropdown-item" href="/about">
                 About Me
               </a>
-              <a class="dropdown-item" href="/contact">
+              <a className="dropdown-item" href="/contact">
                 Contact
               </a>
-              <a class="dropdown-item" href="/events">
+              <a className="dropdown-item" href="/events">
                 Events
               </a>
             </div>

@@ -1,4 +1,5 @@
 import React from "react";
+// import { Link } from "react-router-dom";
 
 export default class Events extends React.Component {
   render() {
@@ -15,17 +16,23 @@ export default class Events extends React.Component {
             <li>Background Music</li>
             <li>Virtual Events</li>
           </ul>
-        </div>
-        <br></br>
-        <div className="review">
           <a
             href="https://g.page/harp-by-deanna/review?gm"
             target="_blank"
             rel="noreferrer"
+            className="review"
           >
             <h5>Leave a Review</h5>
           </a>
         </div>
+        <br></br>
+        {/* <div className="review"> */}
+          {/* <Link to="https://g.page/harp-by-deanna/review?gm">
+            <button>Leave a Review</button>
+          </Link> */}
+
+         
+        {/* </div> */}
 
         <div className="embed-responsive embed-responsive-4by3">
           <iframe

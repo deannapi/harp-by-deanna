@@ -71,7 +71,7 @@ export default function Contact() {
 
       <div className="contactform">
         <img src={harp5} id="harp5" alt="harp5" />
-        <h5>Have all your event details? omplete the form.</h5>
+        <h5>Have all your event details? Complete the form.</h5>
         <form
           id="contact-form"
           onSubmit={handleSubmit}

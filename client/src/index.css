@@ -27,6 +27,7 @@ header h1 {
 
 header {
   text-align: center;
+  padding-bottom: 15px;
 }
 
 .dropdown-item {
@@ -94,8 +95,10 @@ footer ul li {
   text-align: center;
   border: 8px double var(--rosegold);
   border-radius: 40px;
-  margin: 10px 25px 10px 25px;
+  /* margin: 10px 25px 10px 25px; */
+  margin: auto;
   padding: 10px 0 10px 0;
+  width: 70%;
 }
 
 .about img {
@@ -200,10 +203,13 @@ form {
   text-align: center;
   border: 8px var(--rosegold) double;
   border-radius: 40px;
+  width: 30%;
+  margin: auto;
 }
 
 .embed-responsive {
   width: 60%;
+  margin: auto;
 }
 
 iframe {
@@ -216,12 +222,14 @@ iframe {
   font-variant: small-caps;
 }
 
-.review {
-  text-align: center;
+.events ul {
+  padding: 0 ;
 }
 
 .review {
   text-align: center;
-  border: 8px var(--rosegold) double;
-  border-radius: 40px;
+}
+
+.review h5 {
+  font-weight: 600;
 }
