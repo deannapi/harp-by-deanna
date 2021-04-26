@@ -1,12 +1,12 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import harpbydeanna from '../images/harpbydeanna2_crop.png';
 
 export default class Header extends React.Component {
   render() {
     return (
       <>
         <header>
-          <h1>Harp By DeAnna</h1>
+          <img src={harpbydeanna} id="harplogo" alt="logo"/>
           {/* <nav> */}
 
           <div className="btn-group dropright">

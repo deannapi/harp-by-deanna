@@ -1,12 +1,13 @@
 import React from "react";
 import deanna_favicon from "../images/favicon-32x32.png";
+import harpbydeanna from '../images/harpbydeanna_cropped.png';
 
 export default class Footer extends React.Component {
   render() {
     return (
       <>
         <footer>
-          <h4>Harp By DeAnna</h4>
+          <img src={harpbydeanna} alt="logo" id="footer_hbd" />
           <div className="row">
             <ul>
               <li>
