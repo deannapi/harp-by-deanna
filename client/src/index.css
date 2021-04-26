@@ -33,7 +33,7 @@ header {
 }
 
 #harplogo {
-  height: 8em;
+  /* height: 8em; */
   border-radius: 40px;
 }
 
@@ -80,6 +80,7 @@ footer {
 
 #footer_hbd {
   height: 8em;
+  border-radius: 40px;
 }
 
 footer .row {
