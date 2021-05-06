@@ -12,7 +12,7 @@ export default class Footer extends React.Component {
             <ul>
               <li>
                 <a
-                  href="https://www.linkedin.com/in/deanna-martinez-63539a137/"
+                  href="https://www.linkedin.com/in/deanna-barker-63539a137/"
                   target="_blank"
                   rel="noreferrer"
                 >
